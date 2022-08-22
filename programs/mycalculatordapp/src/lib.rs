@@ -11,9 +11,32 @@ pub mod mycalculatordapp {
         Ok(())
     }
 
+    // IMPLEMENT ADDITION
     pub fn add(_ctx:Context<Addition>, num1:i64, num2:i64)-> Result<()>{
         let calculator = &mut _ctx.accounts.calculator;
         calculator.result = num1+num2;
+        Ok(())
+    }
+
+    // IMPLEMENT SUBTRACTION
+    pub fn subtract(_ctx:Context<Subtraction>, num1:i64, num2:i64)-> Result<()>{
+        let calculator = &mut _ctx.accounts.calculator;
+        calculator.result = num1-num2;
+        Ok(())
+    }
+
+    // IMPLEMENT MULTIPLY
+    pub fn multiply(_ctx:Context<Multipliction>, num1:i64, num2:i64)-> Result<()>{
+        let calculator = &mut _ctx.accounts.calculator;
+        calculator.result = num1*num2;
+        Ok(())
+    }
+
+    // IMPLEMENT DIVISION
+    pub fn divide(_ctx:Context<Division>, num1:i64, num2:i64)-> Result<()>{
+        let calculator = &mut _ctx.accounts.calculator;
+        calculator.result = num1/num2;
+        calculator.reminder = num1%num2;
         Ok(())
     }
 }
@@ -29,6 +52,29 @@ pub struct Create<'info> {
 
 #[derive(Accounts)]
 pub struct Addition<'info>{
+    #[account(mut)]
+    pub calculator:Account<'info, Calculator>,
+     
+}
+
+
+#[derive(Accounts)]
+pub struct Subtraction<'info>{
+    #[account(mut)]
+    pub calculator:Account<'info, Calculator>,
+     
+}
+
+#[derive(Accounts)]
+pub struct Multipliction<'info>{
+    #[account(mut)]
+    pub calculator:Account<'info, Calculator>,
+     
+}
+
+
+#[derive(Accounts)]
+pub struct Division<'info>{
     #[account(mut)]
     pub calculator:Account<'info, Calculator>,
      
